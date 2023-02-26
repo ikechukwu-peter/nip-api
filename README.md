@@ -25,7 +25,7 @@ Install Node and npm using the `npm install` command on your command line, then 
 
 ### Setup
 
-Clone this repository by typing `git clone https://github.com/ikechukwu-peter/short-url-api.git` on your terminal.
+Clone this repository by typing `git clone https://github.com/ikechukwu-peter/nip-api.git` on your terminal.
 
 ## Installation
 

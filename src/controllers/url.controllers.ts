@@ -1,3 +1,4 @@
+import { urlLogger } from "./../logger";
 import { Request, Response } from "express";
 import dayjs from "dayjs";
 import * as bcrypt from "bcrypt";
@@ -84,6 +85,7 @@ export const createUrl = async (
     });
 
     if (customUrlExist) {
+      urlLogger.error(`Custom url ${req.body?.customUrl} already exist`);
       return res
         .status(422)
         .json({ error: `Custom url ${req.body?.customUrl} already exist` });
@@ -92,7 +94,7 @@ export const createUrl = async (
 
   const shortUrl = generateShortUrl();
 
-  console.log(shortUrl, "SHORT URL");
+  urlLogger.info(shortUrl, "SHORT URL");
 
   //formulate document
   const newUrl = await UrlModel.create({
@@ -141,6 +143,7 @@ export const getUrl = async (
   }).select("-password");
 
   if (!urlData) {
+    urlLogger.error(`${url} is invalid or has expired`);
     return res.status(404).json({ error: `${url} is invalid or has expired` });
   }
 
@@ -165,6 +168,9 @@ export const getUrlWithPassword = async (
   });
 
   if (!urlData) {
+    urlLogger.error(
+      `${req.protocol}://${req.headers.host}/${url} is invalid or has expired`
+    );
     return res.status(404).json({
       error: `${req.protocol}://${req.headers.host}/${url} is invalid or has expired`,
     });
@@ -172,6 +178,7 @@ export const getUrlWithPassword = async (
 
   //check if password matches
   if (!(await bcrypt.compare(password, urlData?.password as string))) {
+    urlLogger.error(`${url} is invalid or has expired`);
     return res.status(404).json({ error: `${url} is invalid or has expired` });
   }
   res.status(200).json({ resource: urlData.originalUrl });
@@ -216,6 +223,7 @@ export const getAUrl = async (
   }).select("-password");
 
   if (!urlData) {
+    urlLogger.error(`${id} is invalid or has expired`);
     return res.status(404).json({ error: `${id} is invalid or has expired` });
   }
 

@@ -1,3 +1,4 @@
+import { userLogger } from "./../logger";
 import { Request, Response } from "express";
 import { sendMail } from "./../helpers";
 import { IUser, UserModel } from "../models";
@@ -24,7 +25,8 @@ export const login = async (req: Request, res: Response) => {
         .status(200)
         .json({ message: "Please check your email to complete your sign in" });
     } catch (error) {
-      console.log(error);
+      userLogger.error(error);
+      userLogger.error("An error occured while sending mail..");
       return res
         .status(500)
         .json({ error: "An error occured while sending mail.." });
@@ -54,7 +56,7 @@ export const login = async (req: Request, res: Response) => {
       .status(201)
       .json({ message: "Please check your email to complete your sign in" });
   } catch (error) {
-    console.log(error);
+    userLogger.error(error);
     return res
       .status(500)
       .json({ error: "An error occured while sending mail.." });
@@ -76,7 +78,8 @@ export const authenticate = async (req: Request, res: Response) => {
 
     // Check if the token has expired
     if (expTime < Date.now() / 1000) {
-      console.log("Token has expired");
+      userLogger.error("Invalid token or token has expired");
+
       return res
         .status(401)
         .json({ message: "Invalid token or token has expired" });
@@ -94,7 +97,7 @@ export const authenticate = async (req: Request, res: Response) => {
 
       return res.redirect(200, url);
     }
-
+    userLogger.error("Invalid token or token has expired");
     res.status(401).json({ message: "Invalid token or token has expired" });
   } catch (err) {
     res.status(401).json({ message: "Invalid token or token has expired" });
