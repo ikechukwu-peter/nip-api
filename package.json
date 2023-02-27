@@ -1,9 +1,9 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "API for url-shortener",
+  "description": "A secure URL shortener with qrcode, password protection and expiration time",
   "main": "index.js",
-  "repository": "https://github.com/ikechukwu-peter/url-shortener",
+  "repository": "https://github.com/ikechukwu-peter/nip-api.git",
   "author": "Ikechukwu Peter",
   "license": "MIT",
   "private": false,

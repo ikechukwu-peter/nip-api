@@ -25,6 +25,12 @@ const urlSchema = yup.object({
 
 const getUrlSchema = yup.object({
   params: yup.object({
+    url: yup.string().required("url is required"),
+  }),
+});
+
+const getAUrlSchema = yup.object({
+  params: yup.object({
     id: yup.string().required("id is required"),
   }),
 });
@@ -41,5 +47,6 @@ export {
   authSchema,
   urlSchema,
   getUrlSchema,
+  getAUrlSchema,
   getUrlWithPasswordSchema,
 };

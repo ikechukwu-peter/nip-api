@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
   authSchema,
+  getAUrlSchema,
   getUrlSchema,
   getUrlWithPasswordSchema,
   loginSchema,
@@ -15,6 +16,7 @@ export const validate =
       | typeof authSchema
       | typeof urlSchema
       | typeof getUrlSchema
+      | typeof getAUrlSchema
       | typeof getUrlWithPasswordSchema
   ) =>
   async (req: Request, res: Response, next: NextFunction) => {

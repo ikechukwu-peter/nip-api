@@ -2,6 +2,7 @@ import express from "express";
 import passport from "passport";
 import { validate } from "../middlewares";
 import {
+  getAUrlSchema,
   getUrlSchema,
   getUrlWithPasswordSchema,
   urlSchema,
@@ -35,7 +36,7 @@ urlRouter.get(
 urlRouter.get(
   "/find/:id",
   passport.authenticate("jwt", { session: false }),
-  validate(getUrlSchema),
+  validate(getAUrlSchema),
   getAUrl
 );
 
