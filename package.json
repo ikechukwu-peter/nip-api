@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "dev": "npx nodemon",
-    "start": "yarn run build && node ./build/index.js",
+    "start": "node ./build/index.js",
     "build": "rimraf ./build && tsc",
     "lint": "npx eslint --ignore-path .gitignore --ext .js,.ts --fix",
     "format": "npx prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
