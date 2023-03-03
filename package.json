@@ -14,6 +14,10 @@
     "lint": "npx eslint --ignore-path .gitignore --ext .js,.ts --fix",
     "format": "npx prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
+  "pre-commit": [
+    "lint",
+    "format"
+  ],
   "dependencies": {
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.13",
@@ -30,6 +34,7 @@
     "nodemailer": "^6.9.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "precommit": "^1.2.2",
     "qrcode": "^1.5.1",
     "winston": "^3.8.2",
     "xss-clean": "^0.1.1",
@@ -57,7 +62,6 @@
     "husky": "^8.0.3",
     "nodemon": "^2.0.20",
     "rimraf": "^4.1.2",
-    "rimraff": "^0.0.1-security",
     "ts-node": "^10.9.1",
     "typescript": "*"
   }
