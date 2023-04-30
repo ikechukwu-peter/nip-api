@@ -2,14 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "./build/index.js",
+      "src": "package.json",
       "use": "@vercel/node"
+    },
+    {
+      "src": "tsconfig.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "src/**/*",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "2048"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/build/index.js"
     }
   ]
 }
